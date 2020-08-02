@@ -41,6 +41,7 @@ static int		out_line(char **line, char **work_str, int fd)
 	if (ft_strchr(work_str[fd], '\n') != NULL)
 	{
 		offset = ft_offset(work_str[fd], '\n');
+		free(line);
 		*line = ft_strsub(work_str[fd], 0, offset);
 		tmp = ft_strdup(work_str[fd] + offset + 1);
 		free(work_str[fd]);

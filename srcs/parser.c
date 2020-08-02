@@ -21,15 +21,24 @@ int		get_width(int fd)
 	int 	width;
 	char 	*line;
 	char	**line2;
-
+	int 	i;
+	
 	width = 0;
+	i = 	0;
 	get_next_line(fd, &line);
 
-//	printf("%s\n", line);
+
 
 	line2 = ft_strsplit(line, ' ');
 	while (line2[width])
 		width++;
+	free(line);
+	while (i < width)
+	{
+		free(line2[i]);
+		i++;
+	}
+	free(line2);
 	return (width);
 }
 
@@ -42,6 +51,7 @@ int		get_height(int fd)
 	height = 0;
 	while (get_next_line(fd, &line))
 		height++;
+	free(line);
 	return (height + 1);
 }
 
@@ -49,15 +59,22 @@ int		get_z(t_map *map)
 {
 	int i;
 	int j;
+	int	k;
 	int fd;
 	char *line;
 	char **line2;
 
 	i = 0;
 	j = 0;
+	k = 0;
 	fd = open(map->file_name, O_RDONLY);
 	while (get_next_line(fd, &line))
 	{
+		// free(line);
+		k = 0;
+		while (line2[k])
+			free(line2[k++]);
+		free(line2);
 		line2 = ft_strsplit(line, ' ');
 		j = 0;
 		while (line2[j])
@@ -70,21 +87,30 @@ int		get_z(t_map *map)
 		i++;
 	}
 	map->z_index[i] = NULL;
+
+	j = 0;
+	// while (line2[j])
+	// 	free(line2[j++]);
+	// free(line2);
 	
 // TEST MAP PRINT
-	i = 0;
-	j = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			printf("%3d  |", map->z_index[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
+	// i = 0;
+	// j = 0;
+	// while (i < map->height)
+	// {
+	// 	j = 0;
+	// 	while (j < map->width)
+	// 	{
+	// 		printf("%3d  |", map->z_index[i][j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	i++;
+	// }
+	// free(line);
+
+
+
 
 	return (0);
 }

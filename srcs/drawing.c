@@ -50,8 +50,8 @@ void	bresenham(float x0, float y0, float x, float y, t_map *map)
 	map->color = (z0 || z) ? 0xff0000 : 0xffffff;
 
 
-	// isometric(&x0, &y0, z0, map);
-	// isometric(&x, &y, z, map);
+	isometric(&x0, &y0, z0, map);
+	isometric(&x, &y, z, map);
 
 	x0 += 200;
 	y0 += 200;

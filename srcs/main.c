@@ -71,5 +71,7 @@ int		main(int argc, char **argv)
 	mlx_key_hook(map->win_ptr, deal_key, map);
 	mlx_loop(map->mlx_ptr);
 
+	free(map);
+
 	return (0);
 }
